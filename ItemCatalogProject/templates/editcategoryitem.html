@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <link rel=stylesheet type=text/css href="{{url_for('static', filename='style.css')}}">
+      <meta charset = "UTF-8" />
+   </head>
+    <body>
+      <div class="topBanner">
+	<div class="catalogAppBannerTitle"><h1>Catalog App</h1></div>
+        {%if 'username' not in session %}
+        <a href="{{url_for('showLogin')}}" class="loginLogout">Login</a>
+        {% else %}
+        <a href="{{url_for('gdisconnect')}}" class="loginLogout">Logout </a>
+        {% endif %}
+      </div>
+      <div class="mainDiv">
+	<h1>Edit {{item.category.name}}</h1>
+	<!-- Create edit item form  -->
+	<form action= "{{url_for('editCategoryItem', category_name=item.category.name, item_name=item.name)}}" method = 'POST'>
+	  <p>Name</p>
+	  <input type = 'text' size='30' name = 'name' placeholder = '{{item.name}}'>
+	  <br>
+	  <p>Description</p>
+	  <input type = 'text' size='30' name = 'description' placeholder = '{{item.description}}'>
+	  <br>
+	  <p>Category</p>
+	  <select name = 'category'>
+	    {% for c in categories %}
+	    <option value="{{c.name}}">{{c.name}}</option>
+	    {% endfor %}
+	  </select>
+	  <br>
+	  <button type='submit' value='Edit' style="margin-top:2%;">Submit</button>
+	</form>
+	<br>
+	<a href='{{url_for("showItemDesc", category_name=item.category.name, item_name=item.name)}}'>
+	  Back
+	</a>
+      </div>
+    </body>
+</html>

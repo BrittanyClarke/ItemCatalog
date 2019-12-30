@@ -1,0 +1,43 @@
+<html>
+   <head>
+      <link rel=stylesheet type=text/css href="{{url_for('static', filename='style.css')}}">
+   </head>
+   <body>
+     <div class="topBanner">
+       <div class="catalogAppBannerTitle"><h1>Catalog App</h1></div>
+         {%if 'username' not in session %}
+         <a href="{{url_for('showLogin')}}" class="loginLogout">Login</a>
+         {% else %}
+         <a href="{{url_for('gdisconnect')}}" class="loginLogout">Logout </a>
+         {% endif %}
+      </div>
+      <div class="mainDiv">
+         <div class="categories">
+            <a href='{{url_for("newCategory")}}'>
+            Add Category
+            </a>
+            <h1>Categories</h1>
+            {% for c in categories %}
+            <div>
+               <a href='{{url_for("showCategory1", category_name=c.name)}}'>
+               {{c.name}}
+               </a>
+            </div>
+            {% endfor %}
+         </div>
+         <div class="newItem">
+            <a href='{{url_for("newCategoryItem")}}'>
+            Add Item
+            </a>
+            <h1>Latest Items</h1>
+            {% for i in items %}
+            <div>
+               <a href='{{url_for("showItemDesc", category_name=i.category.name, item_name=i.name)}}'>
+               {{i.name}}
+               </a>
+            </div>
+            {% endfor %}
+         </div>
+      </div>
+   </body>
+</html>B

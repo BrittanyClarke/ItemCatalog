@@ -1,0 +1,26 @@
+<html>
+  <head>
+    <link rel=stylesheet type=text/css href="{{url_for('static', filename='style.css')}}">
+  </head>
+  <body>
+    <div class="topBanner">
+      <div class="catalogAppBannerTitle"><h1>Catalog App</h1></div>
+      {%if 'username' not in session %}
+      <a href="{{url_for('showLogin')}}" class="loginLogout">Login</a>
+      {% else %}
+      <a href="{{url_for('gdisconnect')}}" class="loginLogout">Logout </a>
+      {% endif %}
+    </div>
+    <div class="mainDiv">
+      <h1> New Category</h1>
+      <!-- Create form for creating new category -->
+      <form action="{{ url_for('newCategory')}}" method = 'POST'>
+	<p>Name:</p>
+	<input type='text' size='30' name='name'>
+	<br>
+	<input type='submit' value='Create' style="margin-top:2%;">
+      </form>
+      <a href='{{url_for("showCategory")}}'>Back</a>
+    </div>
+  </body>
+</html>

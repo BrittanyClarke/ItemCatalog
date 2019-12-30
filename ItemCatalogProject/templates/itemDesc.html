@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{item.name}}</title>
+    <link rel=stylesheet type=text/css href="{{url_for('static', filename='style.css')}}">
+  </head>
+  <body>
+    <div class="topBanner">
+      <div class="catalogAppBannerTitle"><h1>Catalog App</h1></div>
+      {%if 'username' not in session %}
+      <a href="{{url_for('showLogin')}}" class="loginLogout">Login</a>
+      {% else %}
+      <a href="{{url_for('gdisconnect')}}" class="loginLogout">Logout </a>
+      {% endif %}
+    </div>
+    <div class="mainDiv">
+      <h1>{{item.name}}</h1>
+      <p>Description: {{item.description}}</p>
+      {% if creator == gplusID %}
+         <a href='{{url_for('editCategoryItem', category_name=item.category.name, item_name=item.name)}}'>Edit</a> 
+         <a href='{{url_for('deleteCategoryItem', category_name=item.category.name, item_name=item.name)}}'>Delete</a>
+      {% else %}
+	 <br>
+	 <p style="color: #ff6600">No permission to edit and delete this item.</p>
+      {% endif %}
+      <br>
+      <a href='{{url_for("showCategory")}}'>All items</a>
+      <br>
+      <a style="margin-top:200%;" href='{{url_for("showCategory1", category_name=item.category.name)}}'>{{item.category.name}} Items</a>
+      <div>
+        <h1>JSON Endpoint</h1>
+        <a href={{url_for("itemJson", category_name=item.category.name, item_name=item.name)}}>JSON</a>
+      </div>
+    </div>
+  </body>
+</html>
