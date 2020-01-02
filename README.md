@@ -1,3 +1,3 @@
 # ItemCatalog
 
-"sudo wow"
+`sudo wow`
