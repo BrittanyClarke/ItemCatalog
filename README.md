@@ -1,3 +1,0 @@
-# ItemCatalog
-
-`sudo wow`
